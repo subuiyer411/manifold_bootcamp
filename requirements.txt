@@ -1,3 +1,0 @@
-python-dotenv
-langgraph
-langchain-openai

@@ -1,0 +1,50 @@
+ # System Message - Set the Agent Personality
+ # Human Message - User Query
+ # AI Message - model's response
+
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain.messages import HumanMessage, AIMessage, SystemMessage
+load_dotenv()
+
+llm = ChatOpenAI(model="gpt-4.1-nano",seed=6)
+
+messages = [SystemMessage(content="You are a helpful assistant that can answer questions in a funny manner."), 
+            HumanMessage(content="Who is the Prime Minister of India?"),
+AIMessage(content="The Prime Minister of India is Narendra Modi.")]
+
+response = llm.invoke(messages)
+
+print(response.content)
+
+# Append the response to the messages to include the context
+messages.append(response)
+
+query_2 = HumanMessage(content="What is his age?")
+# Append the query to the messages to include the context
+messages.append(query_2)
+#invoke the model with the messages
+response_2 = llm.invoke(messages)
+print("--------------------------------")
+print(response_2.content)
+
+
+# PS C:\Users\SUBU\Documents\Projects\agentic-bootcamp-april-12> python main.py
+# OpenAI: The Prime Minister of India is Narendra Modi.
+# Google: The current Prime Minister of India is **Narendra Modi**.
+# OpenAI: Could you please provide more context or specify whose age you are referring to?
+# Google: I'm sorry, but I don't know who "he" is in your question.
+
+# To help you, please tell me:
+
+# *   **Who are you asking about?** (e.g., a specific person, a character from a book/movie, someone from an image you were looking at)
+# --------------------------------
+# OpenAI:  content='Could you please provide more context or specify whose age you are referring to?' additional_kwargs={'refusal': None} response_metadata={'token_usage': {'completion_tokens': 15, 'prompt_tokens': 12, 'total_tokens': 27, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'pioion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_detailsion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}
+# Google:  content='I\'m sorry, but I don\'t know who "he" is in your question.\n\nTo help you, please tell me:\n\n*   **Who are you asking about?** (e.g., a specific person, a character from ion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}
+# ion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}
+# ion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_detailsion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_detailsion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}
+# ion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_detailsion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_detailsion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': Nion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'moion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': Nion_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_provider': 'openai', 'model_name': 'gpt-4.1-nano-2025-04-14', 'system_fingerprint': 'fp_124be4d021', 'id': 'chatcmpl-DWIF0VtsLVVfceyxoDWAjb3R2vZGj', 'service_tier': 'default', 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019da4f4-925b-75d0-9cd0-31cc1f1f42fe-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 12, 'output_tokens': 15, 'total_tokens': 27, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}
+# Google:  content='I\'m sorry, but I don\'t know who "he" is in your question.\n\nTo help you, please tell me:\n\n*   **Who are you asking about?** (e.g., a specific person, a character from a book/movie, someone from an image you were looking at)' additional_kwargs={} response_metadata={'finish_reason': 'STOP', 'model_name': 'gemini-2.5-flash', 'safety_ratings': [], 'model_provider': 'google_genai'} id='lc_run--019da4f4-9a16-7352-b38c-2a7fc3895422-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 6, 'output_tokens': 232, 'total_tokens': 238, 'input_token_details': {'cache_read': 0}, 'output_token_details': {'reasoning': 166}}
+# --------------------------------
+# Type of object: <class 'langchain_core.messages.ai.AIMessage'>
+# PS C:\Users\SUBU\Documents\Projects\agentic-bootcamp-april-12>
